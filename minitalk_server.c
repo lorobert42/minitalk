@@ -20,7 +20,7 @@ void	sig_handler(int signum)
 	ft_printf("Received signal\n");
 }
 
-int	main()
+int	main(void)
 {
 	ft_printf("%d\n", getpid());
 	signal(SIGUSR1, sig_handler);

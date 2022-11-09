@@ -13,12 +13,12 @@
 #include <signal.h>
 #include "libft/libft.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	pid;
 
 	(void)argc;
 	pid = ft_atoi(argv[1]);
 	kill(pid, SIGUSR1);
-	return 0;
+	return (0);
 }
