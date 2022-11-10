@@ -14,27 +14,37 @@
 #include <unistd.h>
 #include "libft/libft.h"
 
+void	send_char(unsigned char c, int pid)
+{
+	int	j;
+
+	j = 7;
+	while (j >= 0)
+	{
+		if ((c >> j) & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		usleep(50);
+		j--;
+	}
+}
+
 int	main(int argc, char **argv)
 {
-	int	pid;
-	int	i;
-	int	j;
+	int				pid;
+	int				i;
 
 	if (argc != 3)
 		return (0);
 	pid = ft_atoi(argv[1]);
+	if (pid <= 0)
+		return (0);
 	i = 0;
 	while (argv[2][i])
 	{
-		j = 0;
-		while (j < argv[2][i])
-		{
-			kill(pid, SIGUSR1);
-			usleep(5);
-			j++;
-		}
-		kill(pid, SIGUSR2);
-		usleep(5);
+		send_char(argv[2][i], pid);
+		usleep(50);
 		i++;
 	}
 	return (0);

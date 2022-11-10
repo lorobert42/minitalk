@@ -13,28 +13,33 @@
 #include <signal.h>
 #include <unistd.h>
 #include "libft/libft.h"
+#include "minitalk.h"
 
-int	g_message;
+t_char	g_c;
 
-void	sig1_handler(int signum)
+void	sig_handler(int signum)
 {
-	(void)signum;
-	g_message++;
-}
-
-void	sig2_handler(int signum)
-{
-	(void)signum;
-	write(1, &g_message, 1);
-	g_message = 0;
+	if (signum == SIGUSR1)
+		g_c.c = (g_c.c << 1) + 1;
+	else
+		g_c.c = (g_c.c << 1);
+	g_c.bits++;
+	if (g_c.bits == 8)
+	{
+		write(1, &g_c.c, 1);
+		g_c.c = 0;
+		g_c.bits = 0;
+	}
 }
 
 int	main(void)
 {
 	ft_printf("%d\n", getpid());
-	signal(SIGUSR1, sig1_handler);
-	signal(SIGUSR2, sig2_handler);
-	g_message = 0;
+	if (signal(SIGUSR1, sig_handler) == SIG_ERR || \
+		signal(SIGUSR2, sig_handler) == SIG_ERR)
+		return (0);
+	g_c.c = 0;
+	g_c.bits = 0;
 	while (1)
 	{
 		pause();
