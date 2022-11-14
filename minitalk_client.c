@@ -25,7 +25,7 @@ void	send_char(unsigned char c, int pid)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(50);
+		usleep(200);
 		j--;
 	}
 }
@@ -36,7 +36,10 @@ int	main(int argc, char **argv)
 	int				i;
 
 	if (argc != 3)
+	{
+		ft_printf("Usage: ./client [server pid] [message]\n");
 		return (0);
+	}
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0)
 		return (0);
@@ -44,7 +47,7 @@ int	main(int argc, char **argv)
 	while (argv[2][i])
 	{
 		send_char(argv[2][i], pid);
-		usleep(50);
+		usleep(200);
 		i++;
 	}
 	return (0);
