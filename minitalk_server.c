@@ -34,15 +34,23 @@ void	sig_handler(int signum)
 
 int	main(void)
 {
+	struct sigaction	act1;
+	struct sigaction	act2;
+	struct sigaction	oldact1;
+	struct sigaction	oldact2;
+
 	ft_printf("%d\n", getpid());
-	if (signal(SIGUSR1, sig_handler) == SIG_ERR || \
-		signal(SIGUSR2, sig_handler) == SIG_ERR)
-		return (0);
+	act1.sa_handler = sig_handler;
+	sigaction(SIGUSR1, &act1, &oldact1);
+	act2.sa_handler = sig_handler;
+	sigaction(SIGUSR2, &act2, &oldact2);
 	g_c.c = 0;
 	g_c.bits = 0;
 	while (1)
 	{
 		pause();
 	}
+	sigaction(SIGUSR1, &oldact1, NULL);
+	sigaction(SIGUSR2, &oldact2, NULL);
 	return (0);
 }
