@@ -6,7 +6,7 @@
 #    By: lorobert <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/10 14:40:57 by lorobert          #+#    #+#              #
-#    Updated: 2023/01/16 11:17:01 by lorobert         ###   ########.fr        #
+#    Updated: 2023/01/16 13:40:17 by lorobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBS_TARGET	:=	libft/libft.a
 INCS	:=	libft
 
 CC		:=	gcc
-CFLAGS	:=	-Wall -Wextra -Werror -g
+CFLAGS	:=	-Wall -Wextra -Werror
 CPPFLAGS	:=	$(addprefix -I, $(INCS)) -MMD -MP
 LDFLAGS	:=	$(addprefix -L, $(dir $(LIBS_TARGET)))
 LDLIBS	:=	$(addprefix -l, $(LIBS))
@@ -38,10 +38,10 @@ RM		:=	rm -f
 all: $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBJS) $(LIBS_TARGET)
-	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(SERVER) -fsanitize=address
+	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(SERVER)
 
 $(CLIENT): $(OBJC) $(LIBS_TARGET)
-	$(CC) $(LDFLAGS) $(OBJC) $(LDLIBS) -o $(CLIENT) -fsanitize=address
+	$(CC) $(LDFLAGS) $(OBJC) $(LDLIBS) -o $(CLIENT)
 
 $(LIBS_TARGET):
 	make -C $(@D)
