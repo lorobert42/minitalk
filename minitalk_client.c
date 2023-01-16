@@ -6,7 +6,7 @@
 /*   By: lorobert <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:52:56 by lorobert          #+#    #+#             */
-/*   Updated: 2022/11/09 14:52:58 by lorobert         ###   ########.fr       */
+/*   Updated: 2023/01/16 10:50:36 by lorobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	send_char(unsigned char c, int pid)
 {
 	int	j;
 
-	j = 7;
+	j = 6;
 	while (j >= 0)
 	{
 		if ((c >> j) & 1)

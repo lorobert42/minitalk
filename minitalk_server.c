@@ -24,7 +24,7 @@ void	sig_handler(int signum)
 	else
 		g_c.c = (g_c.c << 1);
 	g_c.bits++;
-	if (g_c.bits == 8)
+	if (g_c.bits == 7)
 	{
 		write(1, &g_c.c, 1);
 		g_c.c = 0;
