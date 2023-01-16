@@ -6,7 +6,7 @@
 #    By: lorobert <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/10 14:40:57 by lorobert          #+#    #+#              #
-#    Updated: 2023/01/16 10:53:30 by lorobert         ###   ########.fr        #
+#    Updated: 2023/01/16 11:17:01 by lorobert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,10 +38,10 @@ RM		:=	rm -f
 all: $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBJS) $(LIBS_TARGET)
-	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(SERVER)
+	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(SERVER) -fsanitize=address
 
 $(CLIENT): $(OBJC) $(LIBS_TARGET)
-	$(CC) $(LDFLAGS) $(OBJC) $(LDLIBS) -o $(CLIENT)
+	$(CC) $(LDFLAGS) $(OBJC) $(LDLIBS) -o $(CLIENT) -fsanitize=address
 
 $(LIBS_TARGET):
 	make -C $(@D)

@@ -6,27 +6,40 @@
 /*   By: lorobert <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:52:56 by lorobert          #+#    #+#             */
-/*   Updated: 2023/01/16 10:50:36 by lorobert         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:54:22 by lorobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "libft/libft.h"
+
+void	ft_error(char *str)
+{
+	ft_printf("%s", str);
+	exit(0);
+}
 
 void	send_char(unsigned char c, int pid)
 {
-	int	j;
+	int	i;
 
-	j = 6;
-	while (j >= 0)
+	i = 6;
+	while (i >= 0)
 	{
-		if ((c >> j) & 1)
-			kill(pid, SIGUSR1);
+		if ((c >> i) & 1)
+		{
+			if (kill(pid, SIGUSR1) == -1)
+				ft_error("Error sending signal\n");
+		}
 		else
-			kill(pid, SIGUSR2);
+		{
+			if (kill(pid, SIGUSR2) == -1)
+				ft_error("Error sending signal\n");
+		}
 		usleep(200);
-		j--;
+		i--;
 	}
 }
 
